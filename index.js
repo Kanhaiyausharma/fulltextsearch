@@ -12,7 +12,7 @@ const carschema = new mongoose.Schema({
     brand:String,
 },{collection:'cartable'});
 
-carschema.index({carname:'text'});
+//carschema.index({carname:'text'});
 
 let carModel = new mongoose.model('carschema',carschema);
 
@@ -30,8 +30,13 @@ async function saveCar() {
 //saveCar();
 
 async function getCars(){
-    $query = 'ciaz';
-    let result = await carModel.find({$text:{$search:$query}},(err,res)=>{
+    query = 'alt';
+    q= new RegExp(query,"i");
+    console.log(q);
+    // full search text
+    //let result = await carModel.find({$text:{$search:$query}},(err,res)=>{
+    // Partial search text
+    let result = await carModel.find({carname:q},(err,res)=>{
         console.log(err);
         console.log(res);
     });
